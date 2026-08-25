@@ -166,7 +166,7 @@ st.markdown(f"""
 - `{company_name}`는 평균 보다 `{int(diff_year):,}` 원 `{upordown}` `{int(info['연간급여추정']):,}` 원을 **연봉**을 받는 것으로 추정합니다.
 """)
 
-fig, ax = plt.subplot(1, 2)
+fig, ax = plt.pyplot(1, 2)
 p1 = ax[0].bar(x=["Average", "Your Company"], height=(comp_output.iloc[0, 0], info['월급여추정']), width=0.7)
 ax[0].bar_label(p1, fmt='%d')
 p1[0].set_color('black')
@@ -185,3 +185,13 @@ ax[1].tick_params(axis='both', which='major', labelsize=8)
 ax[1].tick_params(axis='both', which='minor', labelsize=6)
 
 st.pyplot(fig)
+
+st.markdown('### 동종업계')
+df = data.get_data()
+st.dataframe(df.loc[df['업종코드'] == info['업종코드'], ['사업장명', '월급여추정', '연간급여추정', '가입자수']]\
+    .sort_values('연간급여추정', ascending=False).head(10).round(0), 
+    use_container_width=True
+)
+
+    else:
+        st.subheader('검색결과가 없습니다')
