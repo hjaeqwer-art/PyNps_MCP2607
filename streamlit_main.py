@@ -193,5 +193,5 @@ st.dataframe(df.loc[df['업종코드'] == info['업종코드'], ['사업장명',
     use_container_width=True
 )
 
-else:
-     st.subheader('검색결과가 없습니다')
+    else:
+         st.subheader('검색결과가 없습니다')
